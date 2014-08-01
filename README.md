@@ -1,13 +1,13 @@
-## Overview
+# Overview
 
 Date change to lunar. Limit same as system program 'date' that support 1901-12-15 ~ 2038-01-19.
 
-## Test
+# Test
 * Ubuntu 12.04 LTS bash/dash pass
 * CentOS 6.4 pass
 * Fedora 18 pass
 
-## Usage
+# Usage
 Usage input date: enter 'lunar' directory and input
 
 <pre>
@@ -27,10 +27,10 @@ Or usage system date: enter 'lunar' directory and input
 ./lunar.sh
 </pre>
 
-## Validate
+# Validate
 You can validate go to <http://www.herongyang.com/Year_zh/Program-Chinese-Calendar-Algorithm.html>
 
-## Databases
+# Databases
 The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/archive/2012/08/21/187846.html>
 
 //0~4 5 bit: Day of Spring Festival;
@@ -102,48 +102,48 @@ The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/arc
      0x4A4EB9,0x0A4D4C,0x0D1541,0x2D92B5           //2091-2099
 </pre>
 
-## Variable
-date_year	    Year
+# Variable
+date_year: Year
 
-date_month		Month
+date_month: Month
 
-date_day		Day
+date_day: Day
 
-date_days		Day of year(001..366)
+date_days: Day of year(001..366)
 
-lunar_year		Lunar year
+lunar_year: Lunar year
 
-lunar_year_data		Lunar year data(hexadecimal)
+lunar_year_data: Lunar year data(hexadecimal)
 
-lunar_year_data_bin	Lunar year data(binary)
+lunar_year_data_bin: Lunar year data(binary)
 
-new_year_month_bin	Month of year at Spring Festival
+new_year_month_bin: Month of year at Spring Festival
 
 new_year_month
 
-new_year_day_bin	Day of month at Spring Festival
+new_year_day_bin: Day of month at Spring Festival
 
 new_year_day
 
-new_year_days		Day of year at Spring Festival
+new_year_days: Day of year at Spring Festival
 
-lunar_days		Day of lunar year. Tt's positive number that after Spring Festival. Negative number that before Spring Festival
+lunar_days: Day of lunar year. Tt's positive number that after Spring Festival. Negative number that before Spring Festival
 
-befor_or_after		'0' is current lunar year, '1' is previous lunar year
+befor_or_after: '0' is current lunar year, '1' is previous lunar year
 
-lunar_leap_month_bin	Leap month of lunar year.
+lunar_leap_month_bin: Leap month of lunar year.
 
 lunar_leap_month
 
-lunar_month_all_bin	    Months database of lunar year
+lunar_month_all_bin: Months database of lunar year
 
 lunar_month_all
 
-lunar_month		Month of lunar year
+lunar_month:Month of lunar year
 
-lunar_day		Day of lunar year
+lunar_day:Day of lunar year
 
-## databases file
+# databases file
 
 three column:
 
