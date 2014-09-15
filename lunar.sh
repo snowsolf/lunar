@@ -6,7 +6,7 @@
 #########################################################################
 #!/bin/sh
 
-Version=1.0
+Version=2.0
 Editor=snowsolf
 Email=snowsolf@hotmail.com
 
@@ -171,4 +171,4 @@ fi
 
 shengxiao_num=$(($((lunar_year - 4598 + 2)) % 12))
 [ "$shengxiao_num" -eq "0" ] && shengxiao_num=12
-sed -n $(($shengxiao_num))p shengxiao
+sed -n $(($shengxiao_num))p zodiac
