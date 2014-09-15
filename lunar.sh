@@ -169,4 +169,6 @@ else
    fi
 fi
 
-sed -n $(($(($lunar_year - 4598 + 2)) % 12))p shengxiao
+shengxiao_num=$(($((lunar_year - 4598 + 2)) % 12))
+[ "$shengxiao_num" -eq "0" ] && shengxiao_num=12
+sed -n $(($shengxiao_num))p shengxiao
