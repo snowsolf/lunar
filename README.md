@@ -31,10 +31,10 @@ Or usage system date: enter 'lunar' directory and input
 ```
 
 ## Validate
-You can validate go to <http://www.herongyang.com/Year_zh/Program-Chinese-Calendar-Algorithm.html>
+You can validate go to [Chinese Calendar](http://www.herongyang.com/Year_zh/Program-Chinese-Calendar-Algorithm.html)
 
 ## Databases
-The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/archive/2012/08/21/187846.html>
+The databases of 'lunar.sh' program come from [cppblog](http://www.cppblog.com/ctou45/archive/2012/08/21/187846.html)
 
 //0~4 5 bit: Day of Spring Festival;
 
