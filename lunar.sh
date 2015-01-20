@@ -42,10 +42,30 @@ function Date_data()
    date_year=$(echo $DATE |sed 's/^\(.\{4\}\).*/\1/')
    date_month=$(echo $DATE |sed 's/.*\(..\)..$/\1/')
    date_day=$(echo $DATE |sed 's/.*\(..\)$/\1/')
-   date_days=$(date -d $DATE +%j)
+   date_days=`get_days $date_year $date_month $date_day`
+}
+
+function get_days() {
+    months=(31 28 31 30 31 30 31 31 30 31 30 31)
+
+    year=$1
+    month=$2
+    day=$3
+
+    [ $(($year % 4)) -eq 0 ] \
+        && [ $(($year % 100)) -ne 0 ] \
+        || [ $(($year % 400)) -eq 0 ] && months[1]=29
+
+    days=$day
+    for i in `seq  0 $(($month - 2))`
+    do
+        days=$(($days + ${months[$i]}))
+    done
+    echo $days
 }
 
 DATE=$@
+
 # handle difference input
 case "$#" in
    0)
@@ -55,7 +75,6 @@ case "$#" in
       Date_data
    ;;
    1)
-       date -d $DATE +%j > /dev/null || ((Usage && exit 0))
       case "$1" in
          -h|--help)
             Usage
@@ -67,9 +86,7 @@ case "$#" in
             exit 0
          ;;
          [1][9][0-9][0-9][0-9][0-9][0-9][0-9]|[2][0][0-9][0-9][0-9][0-9][0-9][0-9])
-            [ "$1" -ge "19010101" ] && [ "$1" -lt "19011215" ] || [ "$1" -gt "20380119" ] && [ "$1" -le "20991231" ] \
-            && echo -e "'date' program no support: $1\n" && Usage
-            [ "$1" -ge "19000000" ] && [ "$1" -lt "19010101" ] || [ "$1" -gt "20991231" ] && [ "$1" -le "20999999" ] \
+            [ "$1" -lt "19010219" ] || [ "$1" -gt "20991231" ] \
             && echo -e "Invalid parameter: $1\n" && Usage
             Date_data
          ;;
@@ -80,7 +97,7 @@ case "$#" in
       esac
    ;;
    *)
-      echo -e "The number of parameter greater than one !\n"
+      echo -e "The number of parameter more than one !\n"
       Usage
    ;;
 esac
@@ -102,13 +119,16 @@ new_year_month=$(echo "ibase=2;$new_year_month_bin"|bc |sed -e :a -e 's/^.\{1,1\
 new_year_day_bin=$(echo $lunar_year_data_bin |sed -e 's/.*\(.\{5\}\)$/\1/')
 new_year_day=$(echo "ibase=2;$new_year_day_bin"|bc |sed -e :a -e 's/^.\{1,1\}$/0&/;ta')
 
-new_year_days=$(date -d $date_year$new_year_month$new_year_day +%j)
+new_year_days=`get_days $date_year $new_year_month $new_year_day`
+
 lunar_days=$(expr $date_days - $new_year_days + 1)
+
 # flag
 befor_or_after=0
 
 if [ "$lunar_days" -le "0" ]; then
    befor_or_after=1
+
    date_year=$(($date_year - 1))
 
    lunar_year=$(sed /$date_year/!d $databases_path |sed 's/^\(....\).*/\1/')
@@ -137,20 +157,31 @@ else
    lunar_day=$((-$lunar_days))
    lunar_month_all_bin=$(echo $lunar_month_all_bin |rev)
    lunar_month_all=$(echo $lunar_month_all_bin |sed -e 's/0/29\ /g' |sed -e 's/1/30\ /g')
+
+   eq_flag=0
+
    for i in $lunar_month_all
    do
-      [ "$lunar_day" -eq "$i" ] && break
-      if [ "$lunar_day" -gt "$i" ]; then
-         lunar_day=$(($lunar_day - $i))
-         lunar_month=$(($lunar_month - 1))
-      else
-         lunar_day=$(($i - $lunar_day))
-         break
+       if [ "$eq_flag" = "0" ];then
+          [ "$lunar_day" -eq "$i" ] && eq_flag=1 && continue
+          if [ "$lunar_day" -gt "$i" ]; then
+             lunar_day=$(($lunar_day - $i))
+             lunar_month=$(($lunar_month - 1))
+          else
+             lunar_day=$(($i - $lunar_day))
+             break
+          fi
+
+       else
+          lunar_day=$i
+          lunar_month=$(($lunar_month - 1))
+          break
       fi
    done
 fi
 
 # output
+echo "Lunar date:"
 if [ "$lunar_leap_month" = "0" ]; then
     echo $lunar_year-$lunar_month-$lunar_day
 else
@@ -169,6 +200,6 @@ else
    fi
 fi
 
-shengxiao_num=$(($((lunar_year - 4598 + 2)) % 12))
-[ "$shengxiao_num" -eq "0" ] && shengxiao_num=12
-sed -n $(($shengxiao_num))p zodiac
+zodiac_num=$(($((lunar_year - 4598 + 2)) % 12))
+[ "$zodiac_num" -eq "0" ] && zodiac_num=12
+echo "Zodiac:" $(sed -n $(($zodiac_num))p zodiac)

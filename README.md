@@ -1,36 +1,39 @@
-# Overview
+# Lunar
+
+
+## Overview
 
 Date change to lunar. Limit same as system program 'date' that support 1901-12-15 ~ 2038-01-19.
 
-# Test
+## Test
 * Ubuntu 12.04 LTS bash/dash pass
 * CentOS 6.4 pass
 * Fedora 18 pass
 
-# Usage
+## Usage
 Usage input date: enter 'lunar' directory and input
 
-<pre>
+```
 ./lunar.sh 20140625
-</pre>
+```
 
 Parameters need 8 bit. For examples:
 
 2014-01-01
-<pre>
+```
 ./lunar.sh 20140101
-</pre>
+```
 
 Or usage system date: enter 'lunar' directory and input
 
-<pre>
+```
 ./lunar.sh
-</pre>
+```
 
-# Validate
+## Validate
 You can validate go to <http://www.herongyang.com/Year_zh/Program-Chinese-Calendar-Algorithm.html>
 
-# Databases
+## Databases
 The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/archive/2012/08/21/187846.html>
 
 //0~4 5 bit: Day of Spring Festival;
@@ -40,7 +43,7 @@ The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/arc
 //7~19 13bit: 13 months, '1' is big month, '0' is small month. Last number invalid if no leap month.
 
 //20~23 4bit: Leap month of months, It's '0' that if no leap.
-<pre>
+```
      0x04AE53,0x0A5748,0x5526BD,0x0D2650,0x0D9544,
      0x46AAB9,0x056A4D,0x09AD42,0x24AEB6,0x04AE4A, //1901-1910
 
@@ -100,9 +103,9 @@ The databases of 'lunar.sh' program come from <http://www.cppblog.com/ctou45/arc
 
      0x0D5252,0x0DAA47,0x66B53B,0x056D4F,0x04AE45,
      0x4A4EB9,0x0A4D4C,0x0D1541,0x2D92B5           //2091-2099
-</pre>
+```
 
-# Variable
+## Variable
 date_year: Year
 
 date_month: Month
@@ -143,7 +146,7 @@ lunar_month:Month of lunar year
 
 lunar_day:Day of lunar year
 
-# databases file
+## databases file
 
 three column:
 
