@@ -70,7 +70,7 @@ DATE=$@
 case "$#" in
    0)
       echo "No parameters!"
-      echo -e "Usage system time: $(date +%Y-%m-%d)\n"
+      echo -e "Usage system time: $(date +%Y-%m-%d)"
       DATE=$(date +%Y%m%d)
       Date_data
    ;;
@@ -181,22 +181,21 @@ else
 fi
 
 # output
-echo "Lunar date:"
 if [ "$lunar_leap_month" = "0" ]; then
-    echo $lunar_year-$lunar_month-$lunar_day
+    echo "Lunar date:" $lunar_year-$lunar_month-$lunar_day
 else
    if [ "$lunar_leap_month" -ge "$lunar_month" ]; then
-      echo $lunar_year-$lunar_month-$lunar_day
+      echo "Lunar date:" $lunar_year-$lunar_month-$lunar_day
    elif [ "$befor_or_after" = "0" ]; then
       if [ "$(($lunar_leap_month + 1))" = "$lunar_month" ];then
          lunar_month=$(($lunar_month - 1))
-         echo $lunar_year-*$lunar_month-$lunar_day
+         echo "Lunar date:" $lunar_year-*$lunar_month-$lunar_day
       else
          lunar_month=$(($lunar_month - 1))
-         echo $lunar_year-$lunar_month-$lunar_day
+         echo "Lunar date:" $lunar_year-$lunar_month-$lunar_day
       fi
    else
-      echo $lunar_year-$lunar_month-$lunar_day
+      echo "Lunar date:" $lunar_year-$lunar_month-$lunar_day
    fi
 fi
 
