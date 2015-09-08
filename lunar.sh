@@ -40,8 +40,8 @@ EOF
 function Date_data()
 {
    date_year=$(echo $DATE |sed 's/^\(.\{4\}\).*/\1/')
-   date_month=$(echo $DATE |sed 's/.*\(..\)..$/\1/')
-   date_day=$(echo $DATE |sed 's/.*\(..\)$/\1/')
+   date_month=$(echo $DATE |sed 's/.*\(..\)..$/\1/' |sed 's/^0*//')
+   date_day=$(echo $DATE |sed 's/.*\(..\)$/\1/' |sed 's/^0*//')
    date_days=`get_days $date_year $date_month $date_day`
 }
 
